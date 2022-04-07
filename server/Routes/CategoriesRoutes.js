@@ -28,7 +28,7 @@ categorytRoute.get(
   })
 );
 
-// ADMIN GET ALL PRODUCT WITHOUT SEARCH AND PEGINATION
+// ADMIN GET ALL CATEGORY WITHOUT SEARCH AND PEGINATION
 categorytRoute.get(
   "/all",
   protect,
@@ -39,7 +39,7 @@ categorytRoute.get(
   })
 );
 
-// GET SINGLE PRODUCT
+// GET SINGLE CATEGORY
 categorytRoute.get(
   "/:id",
   asyncHandler(async (req, res) => {
@@ -53,7 +53,7 @@ categorytRoute.get(
   })
 );
 
-// DELETE PRODUCT
+// DELETE CATEGORY
 categorytRoute.delete(
   "/:id",
   protect,
@@ -70,7 +70,7 @@ categorytRoute.delete(
   })
 );
 
-// CREATE PRODUCT
+// CREATE CATEGORY
 categorytRoute.post(
   "/",
   protect,
@@ -99,7 +99,7 @@ categorytRoute.post(
   })
 );
 
-// UPDATE PRODUCT
+// UPDATE CATEGORY
 categorytRoute.put(
   "/:id",
   protect,
@@ -107,7 +107,7 @@ categorytRoute.put(
   asyncHandler(async (req, res) => {
     const { name, description, image } = req.body;
     const category = await Category.findById(req.params.id);
-    if (product) {
+    if (category) {
       category.name = name || category.name;
       category.description = description || category.description;
       category.image = image || category.image;

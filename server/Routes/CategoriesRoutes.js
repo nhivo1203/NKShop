@@ -1,7 +1,7 @@
 import express from "express";
 import asyncHandler from "express-async-handler";
 import Category from "../Models/Categories.js";
-import { admin, protect } from "./../Middleware/AuthMiddleware.js";
+import { admin, protect, staff } from "./../Middleware/AuthMiddleware.js";
 
 const categorytRoute = express.Router();
 
@@ -33,6 +33,7 @@ categorytRoute.get(
   "/all",
   protect,
   admin,
+  staff,
   asyncHandler(async (req, res) => {
     const categories = await Category.find({}).sort({ _id: -1 });
     res.json(categories);
@@ -58,6 +59,7 @@ categorytRoute.delete(
   "/:id",
   protect,
   admin,
+  staff,
   asyncHandler(async (req, res) => {
     const category = await Category.findById(req.params.id);
     if (category) {
@@ -75,6 +77,7 @@ categorytRoute.post(
   "/",
   protect,
   admin,
+  staff,
   asyncHandler(async (req, res) => {
     const { name, description, image } = req.body;
     const categoryExist = await Category.findOne({ name });
@@ -104,6 +107,7 @@ categorytRoute.put(
   "/:id",
   protect,
   admin,
+  staff,
   asyncHandler(async (req, res) => {
     const { name, description, image } = req.body;
     const category = await Category.findById(req.params.id);

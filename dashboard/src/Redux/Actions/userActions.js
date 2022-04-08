@@ -34,7 +34,7 @@ export const login = (email, password) => async (dispatch) => {
       config
     );
 
-    if (!data.isAdmin === true || !data.isStaff === true ) {
+    if (!data.isAdmin === true && !data.isStaff === true ) {
       toast.error("You are not Admin or Staff", ToastObjects);
       dispatch({
         type: USER_LOGIN_FAIL,

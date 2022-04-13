@@ -143,7 +143,7 @@ export const editCategory = (id) => async (dispatch) => {
 };
 
 // UPDATE CATEGORY
-export const updateCategory = (category) => async (dispatch, getState) => {
+export const updateCATEGORY = (category) => async (dispatch, getState) => {
   try {
     dispatch({ type: CATEGORY_UPDATE_REQUEST });
 

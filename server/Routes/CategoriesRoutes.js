@@ -1,7 +1,7 @@
 import express from "express";
 import asyncHandler from "express-async-handler";
 import Category from "../Models/Categories.js";
-import { admin, protect, staff } from "./../Middleware/AuthMiddleware.js";
+import { admin, protect } from "./../Middleware/AuthMiddleware.js";
 
 const categorytRoute = express.Router();
 
@@ -28,19 +28,18 @@ categorytRoute.get(
   })
 );
 
-// ADMIN GET ALL CATEGORY WITHOUT SEARCH AND PEGINATION
+// ADMIN GET ALL PRODUCT WITHOUT SEARCH AND PEGINATION
 categorytRoute.get(
   "/all",
   protect,
   admin,
-  staff,
   asyncHandler(async (req, res) => {
     const categories = await Category.find({}).sort({ _id: -1 });
     res.json(categories);
   })
 );
 
-// GET SINGLE CATEGORY
+// GET SINGLE PRODUCT
 categorytRoute.get(
   "/:id",
   asyncHandler(async (req, res) => {
@@ -54,12 +53,11 @@ categorytRoute.get(
   })
 );
 
-// DELETE CATEGORY
+// DELETE PRODUCT
 categorytRoute.delete(
   "/:id",
   protect,
   admin,
-  staff,
   asyncHandler(async (req, res) => {
     const category = await Category.findById(req.params.id);
     if (category) {
@@ -72,12 +70,11 @@ categorytRoute.delete(
   })
 );
 
-// CREATE CATEGORY
+// CREATE PRODUCT
 categorytRoute.post(
   "/",
   protect,
   admin,
-  staff,
   asyncHandler(async (req, res) => {
     const { name, description, image } = req.body;
     const categoryExist = await Category.findOne({ name });
@@ -102,16 +99,15 @@ categorytRoute.post(
   })
 );
 
-// UPDATE CATEGORY
+// UPDATE PRODUCT
 categorytRoute.put(
   "/:id",
   protect,
   admin,
-  staff,
   asyncHandler(async (req, res) => {
     const { name, description, image } = req.body;
     const category = await Category.findById(req.params.id);
-    if (category) {
+    if (product) {
       category.name = name || category.name;
       category.description = description || category.description;
       category.image = image || category.image;

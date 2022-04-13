@@ -19,7 +19,6 @@ userRouter.post(
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
-        isStaff: user.isStaff,
         token: generateToken(user._id),
         createdAt: user.createdAt,
       });
@@ -55,8 +54,6 @@ userRouter.post(
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
-        isStaff: user.isStaff,
-
         token: generateToken(user._id),
       });
     } else {
@@ -79,8 +76,6 @@ userRouter.get(
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
-        isStaff: user.isStaff,
-
         createdAt: user.createdAt,
       });
     } else {
@@ -109,8 +104,6 @@ userRouter.put(
         name: updatedUser.name,
         email: updatedUser.email,
         isAdmin: updatedUser.isAdmin,
-        isStaff: updatedUser.isStaff,
-
         createdAt: updatedUser.createdAt,
         token: generateToken(updatedUser._id),
       });

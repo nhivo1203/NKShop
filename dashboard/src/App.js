@@ -12,7 +12,6 @@ import AddProduct from "./screens/AddProduct";
 import Login from "./screens/LoginScreen";
 import UsersScreen from "./screens/UsersScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
-import CategoryEditScreen from "./screens/CategoryEditScreen";
 import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +25,7 @@ function App() {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin && userInfo.isStaff) {
+    if (userInfo && userInfo.isAdmin) {
       dispatch(listProducts());
       dispatch(listOrders());
     }
@@ -38,7 +37,7 @@ function App() {
         <Switch>
           <PrivateRouter path="/" component={HomeScreen} exact />
           <PrivateRouter path="/products" component={ProductScreen} />
-          <PrivateRouter path="/categories" component={CategoriesScreen} />
+          <PrivateRouter path="/category" component={CategoriesScreen} />
           <PrivateRouter path="/orders" component={OrderScreen} />
           <PrivateRouter path="/order/:id" component={OrderDetailScreen} />
           <PrivateRouter path="/addproduct" component={AddProduct} />
@@ -46,11 +45,6 @@ function App() {
           <PrivateRouter
             path="/product/:id/edit"
             component={ProductEditScreen}
-          />
-          <PrivateRouter
-            exact
-            path="/category/:id/edit"
-            component={CategoryEditScreen}
           />
           <Route path="/login" component={Login} />
           <PrivateRouter path="*" component={NotFound} />

@@ -11,8 +11,6 @@ const UserComponent = () => {
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
-  console.log(users);
-
   useEffect(() => {
     dispatch(listUser());
   }, [dispatch]);
@@ -78,8 +76,6 @@ const UserComponent = () => {
                       <div className="card-text text-muted">
                         {user.isAdmin === true ? (
                           <p className="m-0">Admin</p>
-                        ) : user.isStaff ? (
-                          <p className="m-0">Staff</p>
                         ) : (
                           <p className="m-0">Customer</p>
                         )}

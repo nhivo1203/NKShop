@@ -36,13 +36,4 @@ const admin = (req, res, next) => {
     throw new Error("Not authorized as an Admin");
   }
 };
-
-const staff = (req, res, next) => {
-  if (req.user && req.user.isStaff) {
-    next();
-  } else {
-    res.status(401);
-    throw new Error("Not authorized as an Staff");
-  }
-};
-export { protect, admin, staff };
+export { protect, admin };

@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  listCategories,
-  deleteCategory,
-} from "../../Redux/Actions/CategoryActions";
+import { listCategories } from "../../Redux/Actions/CategoryActions";
 import Loading from "../LoadingError/Loading";
 import Message from "../LoadingError/Error";
 
@@ -14,18 +11,9 @@ const CategoriesTable = () => {
   const categoryList = useSelector((state) => state.categoryList);
   const { loading, error, categories } = categoryList;
 
-  const categoryDelete = useSelector((state) => state.categoryDelete);
-  const { error: errorDelete, success: successDelete } = categoryDelete;
-
   useEffect(() => {
     dispatch(listCategories());
-  }, [dispatch, successDelete]);
-
-  const deletehandler = (id) => {
-    if (window.confirm("Are you sure??")) {
-      dispatch(deleteCategory(id));
-    }
-  };
+  }, [dispatch]);
 
   console.log(categories);
 
@@ -33,7 +21,6 @@ const CategoriesTable = () => {
     <div className="col-md-12 col-lg-8">
       {error && <Message variant="alert-danger">{error}</Message>}
       {loading && <Loading />}
-      {errorDelete && <Message variant="alert-danger">{errorDelete}</Message>}
       <table className="table">
         <thead>
           <tr>
@@ -76,17 +63,10 @@ const CategoriesTable = () => {
                     <i className="fas fa-ellipsis-h"></i>
                   </Link>
                   <div className="dropdown-menu">
-                    <Link
-                      className="dropdown-item"
-                      to={`/category/${category._id}/edit`}
-                    >
+                    <Link className="dropdown-item" to="#">
                       Edit info
                     </Link>
-                    <Link
-                      className="dropdown-item text-danger"
-                      to="#"
-                      onClick={() => deletehandler(category._id)}
-                    >
+                    <Link className="dropdown-item text-danger" to="#">
                       Delete
                     </Link>
                   </div>

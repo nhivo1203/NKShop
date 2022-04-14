@@ -146,10 +146,11 @@ productRoute.put(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const { name, price, description, image, countInStock } = req.body;
+    const { name,category, price, description, image, countInStock } = req.body;
     const product = await Product.findById(req.params.id);
     if (product) {
       product.name = name || product.name;
+      product.category = category || product.category;
       product.price = price || product.price;
       product.description = description || product.description;
       product.image = image || product.image;

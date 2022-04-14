@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { PRODUCT_CREATE_RESET } from "../../Redux/Constants/ProductConstants";
 import { createProduct } from "./../../Redux/Actions/ProductActions";
+import { listCategories } from "./../../Redux/Actions/CategoryActions";
 import Toast from "../LoadingError/Toast";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
@@ -27,7 +28,12 @@ const AddProductMain = () => {
   const productCreate = useSelector((state) => state.productCreate);
   const { loading, error, product } = productCreate;
 
+
+  const categoryList = useSelector((state) => state.categoryList);
+  const { loading: categoriesloading, error: categorieserror, categories } = categoryList;
+
   useEffect(() => {
+    dispatch(listCategories());
     if (product) {
       toast.success("Product Added", ToastObjects);
       dispatch({ type: PRODUCT_CREATE_RESET });
@@ -88,15 +94,15 @@ const AddProductMain = () => {
                     <label htmlFor="product_category" className="form-label">
                       Product category
                     </label>
-                    <input
-                      type="text"
-                      placeholder="Type here"
-                      className="form-control"
+                    <select
                       id="product_category"
+                      className="form-control"
                       required
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
-                    />
+                    >
+                      {categories.map(category => (<option value={category._id} >{category.name}</option>))}
+                    </select >
                   </div>
                   <div className="mb-4">
                     <label htmlFor="product_price" className="form-label">

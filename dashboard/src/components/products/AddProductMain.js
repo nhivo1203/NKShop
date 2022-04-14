@@ -28,9 +28,14 @@ const AddProductMain = () => {
   const productCreate = useSelector((state) => state.productCreate);
   const { loading, error, product } = productCreate;
 
-
   const categoryList = useSelector((state) => state.categoryList);
-  const { loading: categoriesloading, error: categorieserror, categories } = categoryList;
+  const {
+    loading: categoriesloading,
+    error: categorieserror,
+    categories,
+  } = categoryList;
+
+  console.log(categories);
 
   useEffect(() => {
     dispatch(listCategories());
@@ -94,6 +99,15 @@ const AddProductMain = () => {
                     <label htmlFor="product_category" className="form-label">
                       Product category
                     </label>
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      className="form-control"
+                      id="product_category"
+                      required
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                    />
                     <select
                       id="product_category"
                       className="form-control"
@@ -101,8 +115,12 @@ const AddProductMain = () => {
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
                     >
-                      {categories.map(category => (<option value={category._id} >{category.name}</option>))}
-                    </select >
+                      {categories.map((category) => (
+                        <option key={category._id} value={category._id}>
+                          {category.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className="mb-4">
                     <label htmlFor="product_price" className="form-label">

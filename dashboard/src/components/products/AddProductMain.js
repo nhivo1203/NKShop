@@ -16,6 +16,7 @@ const ToastObjects = {
 };
 const AddProductMain = () => {
   const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
   const [countInStock, setCountInStock] = useState(0);
@@ -31,6 +32,7 @@ const AddProductMain = () => {
       toast.success("Product Added", ToastObjects);
       dispatch({ type: PRODUCT_CREATE_RESET });
       setName("");
+      setCategory("");
       setDescription("");
       setCountInStock(0);
       setImage("");
@@ -40,7 +42,9 @@ const AddProductMain = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createProduct(name, price, description, image, countInStock));
+    dispatch(
+      createProduct(name, category, price, description, image, countInStock)
+    );
   };
 
   return (
@@ -78,6 +82,20 @@ const AddProductMain = () => {
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="product_category" className="form-label">
+                      Product category
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      className="form-control"
+                      id="product_category"
+                      required
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
                     />
                   </div>
                   <div className="mb-4">

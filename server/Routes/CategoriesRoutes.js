@@ -107,7 +107,7 @@ categorytRoute.put(
   asyncHandler(async (req, res) => {
     const { name, description, image } = req.body;
     const category = await Category.findById(req.params.id);
-    if (product) {
+    if (category) {
       category.name = name || category.name;
       category.description = description || category.description;
       category.image = image || category.image;

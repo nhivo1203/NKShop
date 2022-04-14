@@ -1,6 +1,9 @@
+import mongoose from "mongoose";
+
 const products = [
   {
     name: "Velcro Ballerinas For Girls  (Pink)",
+    category: mongoose.Types.ObjectId('62573d4d51724ad53b6de229'),
     image: "/images/6.png",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
@@ -12,6 +15,7 @@ const products = [
   {
     name: "Velcro Sneakers For Boys & Girls  (Blue)",
     image: "/images/5.png",
+    category: mongoose.Types.ObjectId('62573d4d51724ad53b6de229'),
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
     price: 599,
@@ -21,6 +25,7 @@ const products = [
   },
   {
     name: "Sesame Street Unisex-Child ELMO Puppet Slipper",
+    category: mongoose.Types.ObjectId('62573d4d51724ad53b6de229'),
     image: "/images/4.png",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
@@ -31,6 +36,7 @@ const products = [
   },
   {
     name: "Lace Casual Boots For Boys & Girls  (Tan)",
+    category: "",
     image: "/images/3.png",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
@@ -41,6 +47,7 @@ const products = [
   },
   {
     name: "Lace Walking Shoes For Boys & Girls  (Pink)",
+    category: mongoose.Types.ObjectId('62573d4d51724ad53b6de229'),
     image: "/images/2.png",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
@@ -51,6 +58,7 @@ const products = [
   },
   {
     name: "Women Red Heels Sandal",
+    category: mongoose.Types.ObjectId('62573d4d51724ad53b6de229'),
     image: "/images/1.png",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",

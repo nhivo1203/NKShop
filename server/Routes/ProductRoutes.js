@@ -11,6 +11,7 @@ productRoute.get(
   asyncHandler(async (req, res) => {
     const pageSize = 12;
     const page = Number(req.query.pageNumber) || 1;
+    const filter = req.query.filter || "PRICE_HIGH_TO_LOW";
     const keyword = req.query.keyword
       ? {
           name: {
@@ -20,11 +21,18 @@ productRoute.get(
         }
       : {};
     const count = await Product.countDocuments({ ...keyword });
-    const products = await Product.find({ ...keyword })
+    let products = Product.find({ ...keyword })
       .limit(pageSize)
-      .skip(pageSize * (page - 1))
-      .sort({ _id: -1 });
-    res.json({ products, page, pages: Math.ceil(count / pageSize) });
+      .skip(pageSize * (page - 1));
+
+    if (filter === "PRICE_HIGH_TO_LOW") {
+      products = await products.sort({ price: -1 });
+    }
+
+    if (filter === "PRICE_LOW_TO_HIGH") {
+      products = await products.sort({ price: 1 });
+    }
+    res.json({ products, page, filter, pages: Math.ceil(count / pageSize) });
   })
 );
 
@@ -114,7 +122,8 @@ productRoute.post(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const { name, category ,price, description, image, countInStock } = req.body;
+    const { name, category, price, description, image, countInStock } =
+      req.body;
     const productExist = await Product.findOne({ name });
     if (productExist) {
       res.status(400);
@@ -146,7 +155,8 @@ productRoute.put(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const { name,category, price, description, image, countInStock } = req.body;
+    const { name, category, price, description, image, countInStock } =
+      req.body;
     const product = await Product.findById(req.params.id);
     if (product) {
       product.name = name || product.name;

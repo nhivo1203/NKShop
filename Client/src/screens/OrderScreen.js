@@ -42,7 +42,7 @@ const OrderScreen = ({ match }) => {
   }
   useEffect(() => {
     const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal");
+      const { data: clientId } = await axios.get("${process.env.REACT_APP_SERVER_URL}/config/paypal");
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
@@ -190,7 +190,7 @@ const OrderScreen = ({ match }) => {
                         </div>
                         <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
                           <h4>TỔNG</h4>
-                          <h6>VND {item.qty * item.price}.000</h6>
+                          <h6>{item.qty * item.price}.000 VND</h6>
                         </div>
                       </div>
                     ))}
@@ -205,25 +205,25 @@ const OrderScreen = ({ match }) => {
                       <td>
                         <strong>Tạm tính</strong>
                       </td>
-                      <td>VND {order.imtemsPrice}</td>
+                      <td>{order.imtemsPrice} VND</td>
                     </tr>
                     <tr>
                       <td>
                         <strong>Phí ship</strong>
                       </td>
-                      <td>VND {order.shippingPrice}</td>
+                      <td>{order.shippingPrice} VND</td>
                     </tr>
                     <tr>
                       <td>
                         <strong>GTGT</strong>
                       </td>
-                      <td>VND {order.taxPrice}</td>
+                      <td>{order.taxPrice} VND</td>
                     </tr>
                     <tr>
                       <td>
                         <strong>Tổng cộng</strong>
                       </td>
-                      <td>VND {order.totalPrice}</td>
+                      <td>{order.totalPrice} VND</td>
                     </tr>
                   </tbody>
                 </table>

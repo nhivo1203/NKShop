@@ -32,7 +32,7 @@ export const listCategories = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/categories/all`, config);
+    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/categories/all`, config);
 
     dispatch({ type: CATEGORY_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -65,7 +65,7 @@ export const deleteCategory = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/categories/${id}`, config);
+    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/categories/${id}`, config);
 
     dispatch({ type: CATEGORY_DELETE_SUCCESS });
   } catch (error) {
@@ -100,7 +100,7 @@ export const createCategory =
       };
 
       const { data } = await axios.post(
-        `/api/categories/`,
+        `${process.env.REACT_APP_SERVER_URL}/categories/`,
         { name, description, image },
         config
       );
@@ -125,7 +125,7 @@ export const createCategory =
 export const editCategory = (id) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_EDIT_REQUEST });
-    const { data } = await axios.get(`/api/categories/${id}`);
+    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/categories/${id}`);
     dispatch({ type: CATEGORY_EDIT_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -159,7 +159,7 @@ export const updateCategory = (category) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/api/categories/${category._id}`,
+      `${process.env.REACT_APP_SERVER_URL}/categories/${category._id}`,
       category,
       config
     );

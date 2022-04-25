@@ -80,7 +80,7 @@ const SingleProduct = ({ history, match }) => {
                   <div className="product-count col-lg-7 ">
                     <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Giá</h6>
-                      <span>VND {product.price}</span>
+                      <span>{product.price}.000 VND</span>
                     </div>
                     <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Trạng thái</h6>

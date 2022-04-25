@@ -58,10 +58,10 @@ const AddProductMain = () => {
   const uploadImage = (file) => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "sdzzn33y");
+    formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_CODE);
 
     axios
-      .post("https://api.cloudinary.com/v1_1/nkhouse/image/upload", formData)
+      .post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload`, formData)
       .then((response) => {
         setImage(response.data.url);
         console.log(response);

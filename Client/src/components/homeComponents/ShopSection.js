@@ -10,13 +10,15 @@ import Message from "../LoadingError/Error";
 const ShopSection = (props) => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState();
-  const { keyword, pagenumnber } = props;
+  const { keyword, pagenumber} = props;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
 
+  console.log(products, pagenumber);
+
   useEffect(() => {
-    dispatch(listProduct(keyword, pagenumnber, filter));
-  }, [dispatch, keyword, pagenumnber, filter]);
+    dispatch(listProduct(keyword, pagenumber, filter));
+  }, [dispatch, keyword, pagenumber, filter]);
   return (
     <>
       <div className="container">

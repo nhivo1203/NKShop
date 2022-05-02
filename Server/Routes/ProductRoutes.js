@@ -10,7 +10,7 @@ const productRoute = express.Router();
 productRoute.get(
   "/",
   asyncHandler(async (req, res) => {
-    const pageSize = 12;
+    const pageSize = 6;
     const page = Number(req.query.pageNumber) || 1;
     const filter = req.query.filter || "PRICE_HIGH_TO_LOW";
     const keyword = req.query.keyword

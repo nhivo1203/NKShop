@@ -61,7 +61,10 @@ const AddProductMain = () => {
     formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_CODE);
 
     axios
-      .post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload`, formData)
+      .post(
+        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload`,
+        formData
+      )
       .then((response) => {
         setImage(response.data.url);
         console.log(response);
@@ -109,15 +112,6 @@ const AddProductMain = () => {
                     <label htmlFor="product_category" className="form-label">
                       Product category
                     </label>
-                    <input
-                      type="text"
-                      placeholder="Type here"
-                      className="form-control"
-                      id="product_category"
-                      required
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
-                    />
                     <select
                       id="product_category"
                       className="form-control"

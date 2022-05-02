@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../../Redux/Actions/ProductActions";
 import Loading from "../LoadingError/Loading";
 import Message from "../LoadingError/Error";
+import Pagination from "./pagination";
 
 const MainProducts = () => {
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, page, pages } = productList;
 
   const productDelete = useSelector((state) => state.productDelete);
   const { error: errorDelete, success: successDelete } = productDelete;
@@ -75,7 +76,10 @@ const MainProducts = () => {
             </div>
           )}
 
-          <nav className="float-end mt-4" aria-label="Page navigation">
+          {/* Pagination */}
+          <Pagination pages={pages} page={page} keyword="" />
+
+          {/* <nav className="float-end mt-4" aria-label="Page navigation">
             <ul className="pagination">
               <li className="page-item disabled">
                 <Link className="page-link" to="#">
@@ -103,7 +107,7 @@ const MainProducts = () => {
                 </Link>
               </li>
             </ul>
-          </nav>
+          </nav> */}
         </div>
       </div>
     </section>

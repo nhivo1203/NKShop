@@ -23,7 +23,7 @@ const LatestOrder = (props) => {
                     <b>{order.user?.name}</b>
                   </td>
                   <td>{order.user?.email}</td>
-                  <td>${order.totalPrice}</td>
+                  <td>{order.totalPrice/1000}.000 VNĐ</td>
                   <td>
                     {order.isPaid ? (
                       <span className="badge rounded-pill alert-success">

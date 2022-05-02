@@ -18,7 +18,7 @@ const TopTotal = (props) => {
             </span>
             <div className="text">
               <h6 className="mb-1">Total Sales</h6>{" "}
-              <span>${totalSale.toFixed(0)}</span>
+              <span>{totalSale.toFixed(0)/1000}.000 VNĐ</span>
             </div>
           </article>
         </div>

@@ -18,37 +18,25 @@ import {
 import axios from "axios";
 import { logout } from "./userActions";
 
-export const listProducts = () => async (dispatch, getState) => {
-  try {
-    dispatch({ type: PRODUCT_LIST_REQUEST });
-
-    const {
-      userLogin: { userInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/all`, config);
-
-    dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
-  } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    if (message === "Not authorized, token failed") {
-      dispatch(logout());
+export const listProducts =
+  (keyword = " ", pageNumber = " ", filter = " ") =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: PRODUCT_LIST_REQUEST });
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/products?keyword=${keyword}&pageNumber=${pageNumber}&filter=${filter}`
+      );
+      dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
     }
-    dispatch({
-      type: PRODUCT_LIST_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
 // DELETE PRODUCT
 export const deleteProduct = (id) => async (dispatch, getState) => {
@@ -65,7 +53,10 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/products/${id}`, config);
+    await axios.delete(
+      `${process.env.REACT_APP_SERVER_URL}/products/${id}`,
+      config
+    );
 
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
   } catch (error) {
@@ -85,7 +76,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 
 // CREATE PRODUCT
 export const createProduct =
-  (name,category, price, description, image, countInStock) =>
+  (name, category, price, description, image, countInStock) =>
   async (dispatch, getState) => {
     try {
       dispatch({ type: PRODUCT_CREATE_REQUEST });
@@ -102,7 +93,7 @@ export const createProduct =
 
       const { data } = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/products/`,
-        { name,category, price, description, image, countInStock },
+        { name, category, price, description, image, countInStock },
         config
       );
 
@@ -126,7 +117,9 @@ export const createProduct =
 export const editProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_EDIT_REQUEST });
-    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/${id}`);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/products/${id}`
+    );
     dispatch({ type: PRODUCT_EDIT_SUCCESS, payload: data });
   } catch (error) {
     const message =

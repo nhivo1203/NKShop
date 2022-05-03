@@ -9,7 +9,6 @@ const HomeScreen = ({ match }) => {
   window.scrollTo(0, 0);
   const keyword = match.params.keyword;
   const pagenumber = match.params.pagenumber;
-  console.log(pagenumber);
   return (
     <div>
       <Header />

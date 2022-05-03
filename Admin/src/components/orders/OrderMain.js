@@ -5,7 +5,7 @@ import Orders from "./Orders";
 import { useSelector } from "react-redux";
 
 const OrderMain = () => {
-
+  const [filter, setFilter] = useState();
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
 
@@ -28,7 +28,10 @@ const OrderMain = () => {
               />
             </div>
             <div className="col-lg-2 col-6 col-md-3">
-              <select className="form-select">
+              <select
+                className="form-select"
+                onChange={(e) => setFilter(e.target.value)}
+              >
                 <option>Order is Paid</option>
                 <option>Order not Paid</option>
               </select>

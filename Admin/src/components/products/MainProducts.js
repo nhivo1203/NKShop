@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Product from "./Product";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,8 +7,13 @@ import Loading from "../LoadingError/Loading";
 import Message from "../LoadingError/Error";
 import Pagination from "./pagination";
 
-const MainProducts = () => {
+const MainProducts = (props) => {
   const dispatch = useDispatch();
+
+  const [keyword, setKeyword] = useState("");
+  const [filter, setFilter] = useState("");
+
+  const { pagenumber } = props;
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
@@ -17,8 +22,8 @@ const MainProducts = () => {
   const { error: errorDelete, success: successDelete } = productDelete;
 
   useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch, successDelete]);
+    dispatch(listProducts(keyword, pagenumber, filter));
+  }, [dispatch, successDelete, pagenumber, keyword, filter]);
 
   return (
     <section className="content-main">
@@ -41,19 +46,15 @@ const MainProducts = () => {
                 className="form-control p-2"
               />
             </div>
-            <div className="col-lg-2 col-6 col-md-3">
-              <select className="form-select">
-                <option>All category</option>
-                <option>Electronics</option>
-                <option>Clothings</option>
-                <option>Something else</option>
-              </select>
-            </div>
-            <div className="col-lg-2 col-6 col-md-3">
-              <select className="form-select">
-                <option>Latest added</option>
-                <option>Cheap first</option>
-                <option>Most viewed</option>
+            <div className="col-lg-3 col-6 col-md-3">
+              <select
+                id="filter"
+                value={filter}
+                className="form-select"
+                onChange={(e) => setFilter(e.target.value)}
+              >
+                <option value="PRICE_HIGH_TO_LOW">Price: High to Low</option>
+                <option value="PRICE_LOW_TO_HIGH">Price: Low to High</option>
               </select>
             </div>
           </div>
@@ -70,7 +71,7 @@ const MainProducts = () => {
           ) : (
             <div className="row">
               {/* Products */}
-              {products.map((product) => (
+              {products?.map((product) => (
                 <Product product={product} key={product._id} />
               ))}
             </div>

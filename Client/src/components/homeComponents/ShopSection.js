@@ -10,11 +10,11 @@ import Message from "../LoadingError/Error";
 const ShopSection = (props) => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState();
-  const { keyword, pagenumber} = props;
+  const { keyword, pagenumber } = props;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
 
-  console.log(products, pagenumber);
+  console.log(page, pages);
 
   useEffect(() => {
     dispatch(listProduct(keyword, pagenumber, filter));
@@ -34,19 +34,19 @@ const ShopSection = (props) => {
                   <Message variant="alert-danger">{error}</Message>
                 ) : (
                   <>
-                    <select
-                      id="filter"
-                      value={filter}
-                      className="form-control"
-                      onChange={(e) => setFilter(e.target.value)}
-                    >
-                      <option value="PRICE_HIGH_TO_LOW">
-                        Price: High to Low
-                      </option>
-                      <option value="PRICE_LOW_TO_HIGH">
-                        Price: Low to High
-                      </option>
-                    </select>
+                      <select
+                        id="filter"
+                        value={filter}
+                        className="form-select"
+                        onChange={(e) => setFilter(e.target.value)}
+                      >
+                        <option value="PRICE_HIGH_TO_LOW">
+                          Price: High to Low
+                        </option>
+                        <option value="PRICE_LOW_TO_HIGH">
+                          Price: Low to High
+                        </option>
+                      </select>
                     {products.map((product) => (
                       <div
                         className="shop col-lg-4 col-md-6 col-sm-6"
@@ -70,7 +70,7 @@ const ShopSection = (props) => {
                               value={product.rating}
                               text={`${product.numReviews} reviews`}
                             />
-                            <h3>${product.price}</h3>
+                            <h3>{product.price/1000}.000 VNĐ</h3>
                           </div>
                         </div>
                       </div>

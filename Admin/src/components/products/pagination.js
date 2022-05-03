@@ -15,9 +15,7 @@ const Pagination = (props) => {
               <Link
                 className="page-link"
                 to={
-                  keyword
-                    ? `/search/${keyword}/page/${x + 1}`
-                    : `/page/${x + 1}`
+                     `/products/page/${x + 1}`
                 }
               >
                 {x + 1}

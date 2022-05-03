@@ -48,9 +48,18 @@ orderRouter.get(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const orders = await Order.find({})
-      .sort({ _id: -1 })
-      .populate("user", "id name email");
+    // const filter = req.query.filter || "ORDER_IS_PAID";
+
+    const orders = Order.find({}).populate("user", "id name email");
+
+    if (req.query.filter === "ORDER_IS_PAID") {
+      orders = await orders.sort({ isPaid: -1 });
+    }
+
+    if (req.query.filter === "ORDER_NOT_PAID") {
+      orders = await orders.sort({ isPaid: 1 });
+    }
+
     res.json(orders);
   })
 );

@@ -24,7 +24,7 @@ const Product = (props) => {
             <Link to="#" className="title text-truncate">
               {product.name}
             </Link>
-            <div className="price mb-2">{product.price/10000}.000 VNĐ</div>
+            <div className="price mb-2">{product.price/1000}.000 VNĐ</div>
             <div className="row">
               <Link
                 to={`/product/${product._id}/edit`}

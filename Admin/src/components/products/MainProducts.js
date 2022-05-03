@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../../Redux/Actions/ProductActions";
 import Loading from "../LoadingError/Loading";
 import Message from "../LoadingError/Error";
-import Pagination from "./pagination";
+import Pagination from "../pagination";
 
 const MainProducts = (props) => {
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ const MainProducts = (props) => {
           )}
 
           {/* Pagination */}
-          <Pagination pages={pages} page={page} keyword="" />
+          <Pagination pages={pages} page={page} keyword="" screen="products" />
 
           {/* <nav className="float-end mt-4" aria-label="Page navigation">
             <ul className="pagination">

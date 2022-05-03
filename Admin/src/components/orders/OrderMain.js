@@ -4,8 +4,9 @@ import Loading from "../LoadingError/Loading";
 import Orders from "./Orders";
 import { useDispatch, useSelector } from "react-redux";
 import { listOrders } from "../../Redux/Actions/OrderActions";
+import Pagination from "../pagination";
 
-const OrderMain = () => {
+const OrderMain = (props) => {
   const [filter, setFilter] = useState(true);
   const orderList = useSelector((state) => state.orderList);
   let { loading, error, orders } = orderList;
@@ -15,14 +16,13 @@ const OrderMain = () => {
 
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(listOrders(filter));
+      dispatch(listOrders(filter, props.pageNumber));
     }
   }, [dispatch, userInfo, filter]);
 
-  console.log(orders);
+  console.log(orders, props.pageNumber);
 
   return (
     <section className="content-main">
@@ -60,9 +60,15 @@ const OrderMain = () => {
             ) : error ? (
               <Message variant="alert-danger">{error}</Message>
             ) : (
-              <Orders orders={orders} />
+              <Orders orders={orders?.orders} />
             )}
           </div>
+          <Pagination
+            pages={orders?.pages}
+            page={orders?.page}
+            keyword=""
+            screen="orders"
+          />
         </div>
       </div>
     </section>

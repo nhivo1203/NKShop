@@ -17,8 +17,6 @@ const CategoriesTable = () => {
   const categoryDelete = useSelector((state) => state.categoryDelete);
   const { error: errorDelete, success: successDelete } = categoryDelete;
 
-  console.log(categories);
-
   useEffect(() => {
     dispatch(listCategories());
   }, [dispatch, successDelete]);
@@ -28,8 +26,6 @@ const CategoriesTable = () => {
       dispatch(deleteCategory(id));
     }
   };
-
-  console.log(categories);
 
   return (
     <div className="col-md-12 col-lg-8">

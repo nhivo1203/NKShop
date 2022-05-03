@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Pagination = (props) => {
-  const { page, pages, keyword = "" } = props;
+  const { page, pages, keyword = "", screen } = props;
   return (
     pages > 1 && (
       <nav>
@@ -15,7 +15,7 @@ const Pagination = (props) => {
               <Link
                 className="page-link"
                 to={
-                     `/products/page/${x + 1}`
+                     `/${screen}/page/${x + 1}`
                 }
               >
                 {x + 1}

@@ -68,7 +68,7 @@ const Sidebar = () => {
               <NavLink
                 activeClassName="active"
                 className="menu-link"
-                to="/orders"
+                to="/orders/page/1"
               >
                 <i className="icon fas fa-bags-shopping"></i>
                 <span className="text">Orders</span>

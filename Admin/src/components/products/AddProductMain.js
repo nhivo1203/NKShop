@@ -66,7 +66,6 @@ const AddProductMain = () => {
       )
       .then((response) => {
         setImage(response.data.url);
-        console.log(response);
       });
   };
 

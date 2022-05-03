@@ -2,7 +2,6 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 import Product from "./../Models/ProductModel.js";
 import { admin, protect } from "./../Middleware/AuthMiddleware.js";
-import { Cloudinary } from "../utils/Cloudinary.js";
 
 const productRoute = express.Router();
 
@@ -14,7 +13,6 @@ productRoute.get(
     const page = Number(req.query.pageNumber) || 1;
     const filter = req.query.filter || "PRICE_HIGH_TO_LOW";
     const category = req.query.category || "";
-    console.log(category);
     const keyword = req.query.keyword
       ? {
           name: {
@@ -45,8 +43,6 @@ productRoute.get(
     res.json({
       products,
       page,
-      filter,
-      category,
       pages: Math.ceil(count / pageSize),
     });
   })

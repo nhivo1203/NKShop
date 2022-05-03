@@ -43,7 +43,11 @@ function App() {
             exact
           />
           <PrivateRouter path="/categories" component={CategoriesScreen} />
-          <PrivateRouter path="/orders" component={OrderScreen} />
+          <PrivateRouter
+            path="/orders/page/:pageNumber"
+            component={OrderScreen}
+            exact
+          />
           <PrivateRouter path="/order/:id" component={OrderDetailScreen} />
           <PrivateRouter path="/addproduct" component={AddProduct} />
           <PrivateRouter path="/users" component={UsersScreen} />

@@ -49,8 +49,13 @@ orderRouter.get(
   admin,
   asyncHandler(async (req, res) => {
     const filter = req.query.filter || "ORDER_IS_PAID";
-
-    let orders = await Order.find({}).populate("user", "id name email");
+    const pageSize = 5;
+    const page = Number(req.query.pageNumber) || 1;
+    const count = await Order.countDocuments({});
+    let orders = await Order.find({})
+      .limit(pageSize)
+      .skip(pageSize * (page - 1))
+      .populate("user", "id name email");
     if (filter === "ORDER_IS_PAID") {
       orders = await orders.filter((order) => order.isPaid === true);
     }
@@ -59,7 +64,11 @@ orderRouter.get(
       orders = await orders.filter((order) => order.isPaid === false);
     }
 
-    res.json(orders);
+    res.json({
+      orders,
+      page,
+      pages: Math.ceil(count / pageSize),
+    });
   })
 );
 // USER LOGIN ORDERS

@@ -12,37 +12,42 @@ import {
 import { logout } from "./userActions";
 import axios from "axios";
 
-export const listOrders = (filter = "") => async (dispatch, getState) => {
-  try {
-    dispatch({ type: ORDER_LIST_REQUEST });
+export const listOrders =
+  (filter = " ", pageNumber = " ") =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({ type: ORDER_LIST_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+      const {
+        userLogin: { userInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
 
-    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/orders/all?filter=${filter}`, config);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/orders/all?filter=${filter}&pageNumber=${pageNumber}`,
+        config
+      );
 
-    dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
-  } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    if (message === "Not authorized, token failed") {
-      dispatch(logout());
+      dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      if (message === "Not authorized, token failed") {
+        dispatch(logout());
+      }
+      dispatch({
+        type: ORDER_LIST_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: ORDER_LIST_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
 // ORDER DETAILS
 export const getOrderDetails = (id) => async (dispatch, getState) => {
@@ -59,7 +64,10 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/orders/${id}`, config);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/orders/${id}`,
+      config
+    );
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message =

@@ -24,7 +24,6 @@ const AddProductMain = () => {
   const [image, setImage] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
-  const [imageSelected, setImageSelected] = useState("");
 
   const dispatch = useDispatch();
 

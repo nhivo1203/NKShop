@@ -13,6 +13,8 @@ productRoute.get(
     const pageSize = 6;
     const page = Number(req.query.pageNumber) || 1;
     const filter = req.query.filter || "PRICE_HIGH_TO_LOW";
+    const category = req.query.category || "";
+    console.log(category);
     const keyword = req.query.keyword
       ? {
           name: {
@@ -34,7 +36,19 @@ productRoute.get(
       products = await products.sort({ price: 1 });
     }
 
-    res.json({ products, page, filter, pages: Math.ceil(count / pageSize) });
+    if (category !== "") {
+      products = await products.filter(
+        (product) => String(product.category) === category
+      );
+    }
+
+    res.json({
+      products,
+      page,
+      filter,
+      category,
+      pages: Math.ceil(count / pageSize),
+    });
   })
 );
 
@@ -131,7 +145,6 @@ productRoute.post(
       res.status(400);
       throw new Error("Product name already exist");
     } else {
-
       const product = new Product({
         name,
         category,

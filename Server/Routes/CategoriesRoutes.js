@@ -32,7 +32,6 @@ categorytRoute.get(
 categorytRoute.get(
   "/all",
   protect,
-  admin,
   asyncHandler(async (req, res) => {
     const categories = await Category.find({}).sort({ _id: -1 });
     res.json(categories);

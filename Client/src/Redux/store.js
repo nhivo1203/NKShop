@@ -19,11 +19,13 @@ import {
   orderListMyReducer,
   orderPayReducer,
 } from "./Reducers/OrderReducres";
+import { categoriesListReducer } from "./Reducers/CategoryReducers";
 
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   productReviewCreate: productCreateReviewReducer,
+  categoriesList: categoriesListReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,

@@ -17,7 +17,7 @@ const Main = () => {
           <h2 className="content-title"> Dashboard </h2>
         </div>
         {/* Top Total */}
-        <TopTotal orders={orders} products={products} />
+        <TopTotal orders={orders?.orders} products={products} />
 
         <div className="row">
           {/* STATICS */}
@@ -27,7 +27,11 @@ const Main = () => {
 
         {/* LATEST ORDER */}
         <div className="card mb-4 shadow-sm">
-          <LatestOrder orders={orders} loading={loading} error={error} />
+          <LatestOrder
+            orders={orders?.orders}
+            loading={loading}
+            error={error}
+          />
         </div>
       </section>
     </>

@@ -20,9 +20,7 @@ const OrderMain = (props) => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listOrders(filter, props.pageNumber));
     }
-  }, [dispatch, userInfo, filter]);
-
-  console.log(orders, props.pageNumber);
+  }, [dispatch, userInfo, filter, props.pageNumber]);
 
   return (
     <section className="content-main">

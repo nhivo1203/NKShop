@@ -71,6 +71,29 @@ orderRouter.get(
     });
   })
 );
+
+// ADMIN GET ALL ORDERS
+orderRouter.get(
+  "/allorders",
+  protect,
+  admin,
+  asyncHandler(async (req, res) => {
+    const allorders = await Order.find({})
+      .sort({ _id: -1 })
+      .populate("user", "id name email");
+    res.json(allorders);
+  })
+);
+// USER LOGIN ORDERS
+orderRouter.get(
+  "/",
+  protect,
+  asyncHandler(async (req, res) => {
+    const order = await Order.find({ user: req.user._id }).sort({ _id: -1 });
+    res.json(order);
+  })
+);
+
 // USER LOGIN ORDERS
 orderRouter.get(
   "/",

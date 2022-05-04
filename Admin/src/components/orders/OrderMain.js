@@ -20,6 +20,8 @@ const OrderMain = (props) => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listOrders(filter, props.pageNumber));
     }
+
+    return (orders = null);
   }, [dispatch, userInfo, filter, props.pageNumber]);
 
   return (

@@ -17,7 +17,7 @@ import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "./Redux/Actions/ProductActions";
-import { listOrders } from "./Redux/Actions/OrderActions";
+import { listAllOrders, listOrders } from "./Redux/Actions/OrderActions";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ function App() {
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listProducts());
-      dispatch(listOrders());
+      dispatch(listAllOrders());
     }
   }, [dispatch, userInfo]);
 
